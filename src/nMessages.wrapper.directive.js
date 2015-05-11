@@ -12,7 +12,7 @@
 			restrict: 'EA',
 			replace: true,
 			compile: compile,
-			templateUrl: 'src/nMessages.wrapper.template.html'
+			templateUrl: 'nMessages.wrapper.template.html'
 		};
 		return directive;
 

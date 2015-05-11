@@ -131,6 +131,9 @@ module.exports = function (grunt) {
 				dest: '.tmp/scripts/templates.js',
 				options: {
 					module: 'nCore.<%= pkg.name %>',
+					url: function(url) {
+						return url.replace('dist/', '');
+					},
 					htmlmin: {
 						collapseBooleanAttributes: false,
 						collapseWhitespace: false,
