@@ -130,7 +130,7 @@ module.exports = function (grunt) {
 				],
 				dest: '.tmp/scripts/templates.js',
 				options: {
-					module: '<%= pkg.name %>',
+					module: 'nCore.<%= pkg.name %>',
 					htmlmin: {
 						collapseBooleanAttributes: false,
 						collapseWhitespace: false,
@@ -198,11 +198,12 @@ module.exports = function (grunt) {
 		// Automatically inject Bower components into the app
 		wiredep: {
 			options: {
-				cwd: ''
+				cwd: '',
+				devDependencies: true
 			},
 			app: {
-				src: ['index.html'],
-				ignorePath: /\.\.\//
+				src: ['index.html']
+				//ignorePath: /\.\.\//
 			}
 		},
 		// Empties folders to start fresh
