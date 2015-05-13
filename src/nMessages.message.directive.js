@@ -11,7 +11,7 @@
 		var directive = {
 			restrict: 'EA',
 			transclude: true,
-			templateUrl: 'src/nMessages.message.template.html',
+			templateUrl: 'nMessages.message.template.html',
 			scope: {
 				message: '=nMessagesMessage'
 			},

@@ -38,7 +38,6 @@
 			this.dismissOnClick = defaults.dismissOnClick;
 
 			angular.extend(this, msg);
-			console.log(this)
 
 		}
 
