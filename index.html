@@ -6,7 +6,8 @@
 		<base href="/">
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="dist/nMessages.css">
+        <!--<link rel="stylesheet" href="dist/nMessages.css">-->
+        <link rel="stylesheet" href="test.css">
 	</head>
 	<body ng-app="demoApp" ng-controller="demoCtrl as demo">
 
@@ -203,6 +204,7 @@
 							</tbody>
 						</table>
 						<p>You can see more examples in the examples section below.</p>
+						<button ng-click="demo.createMessage()">Bonus</button>
 					</div>
 
 				</div>
@@ -274,6 +276,9 @@
 				function _getRandomMessage() {
 					return vm.messageContents[Math.floor(Math.random() * vm.messageContents.length)];
 				}
+				function _getRandomType() {
+					return vm.messageTypes[Math.floor(Math.random() * vm.messageTypes.length)];
+				}
 				vm.messageContents = [
 					'Dette er en besked',
 					'Dette er også en besked',
@@ -284,7 +289,7 @@
 					'Nogen siger dette er en besked, men ingen vil stå ved det, Nogen siger dette er en besked, men ingen vil stå ved det, Nogen siger dette er en besked, men ingen vil stå ved det, Nogen siger dette er en besked, men ingen vil stå ved det'
 				];
 
-				vm.messageTypes = ['success', 'warning', 'alert', 'info', 'primary', 'secondary', 'porno'];
+				vm.messageTypes = ['success', 'warning', 'alert', 'info', ''];
 
 				vm.message = {
 					type: 'success',
@@ -321,6 +326,7 @@
 					var msg = angular.copy(vm.message);
 
 					msg.content = _getRandomMessage();
+					msg.type = _getRandomType();
 
 					var msgRef =  nMessages.create(msg);
 					vm.openMessages.push(msgRef);
