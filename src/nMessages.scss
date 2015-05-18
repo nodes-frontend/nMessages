@@ -4,11 +4,13 @@
 
 	variables
 */
+$nodes-messages-min-width: 200px !default;
 $nodes-messages-max-width: 200px !default;
 
 // Layout
 .nodes-messages {
-	position: absolute;
+	position: fixed;
+	min-width: $nodes-messages-min-width;
 	max-width: $nodes-messages-max-width;
 }
 .nodes-messages__list {

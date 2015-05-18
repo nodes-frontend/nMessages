@@ -6,7 +6,8 @@
 		<base href="/">
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="dist/nMessages.css">
+        <!--<link rel="stylesheet" href="dist/nMessages.css">-->
+        <link rel="stylesheet" href="test.css">
 	</head>
 	<body ng-app="demoApp" ng-controller="demoCtrl as demo">
 
@@ -203,6 +204,7 @@
 							</tbody>
 						</table>
 						<p>You can see more examples in the examples section below.</p>
+						<button ng-click="demo.createMessage()">Bonus</button>
 					</div>
 
 				</div>
@@ -229,11 +231,17 @@
 		<!--<button ng-click="demo.dismissAll()">Dismiss all</button>-->
 
 		<!-- bower:js -->
+		<script src="bower_components/modernizr/modernizr.js"></script>
+		<script src="bower_components/jquery/dist/jquery.js"></script>
 		<script src="bower_components/angular/angular.js"></script>
-		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-		<script src="bower_components/angular-animate/angular-animate.js"></script>
 		<script src="bower_components/angular-mocks/angular-mocks.js"></script>
 		<script src="bower_components/angular-scenario/angular-scenario.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.js"></script>
+		<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+		<script src="bower_components/fastclick/lib/fastclick.js"></script>
+		<script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
+		<script src="bower_components/jquery-placeholder/jquery.placeholder.js"></script>
+		<script src="bower_components/foundation/js/foundation.js"></script>
 		<!-- endbower -->
 
 		<!-- Module Specific scripts -->
@@ -268,6 +276,9 @@
 				function _getRandomMessage() {
 					return vm.messageContents[Math.floor(Math.random() * vm.messageContents.length)];
 				}
+				function _getRandomType() {
+					return vm.messageTypes[Math.floor(Math.random() * vm.messageTypes.length)];
+				}
 				vm.messageContents = [
 					'Dette er en besked',
 					'Dette er også en besked',
@@ -278,7 +289,7 @@
 					'Nogen siger dette er en besked, men ingen vil stå ved det, Nogen siger dette er en besked, men ingen vil stå ved det, Nogen siger dette er en besked, men ingen vil stå ved det, Nogen siger dette er en besked, men ingen vil stå ved det'
 				];
 
-				vm.messageTypes = ['success', 'warning', 'alert', 'info', 'primary', 'secondary', 'porno'];
+				vm.messageTypes = ['success', 'warning', 'alert', 'info', ''];
 
 				vm.message = {
 					type: 'success',
@@ -315,6 +326,7 @@
 					var msg = angular.copy(vm.message);
 
 					msg.content = _getRandomMessage();
+					msg.type = _getRandomType();
 
 					var msgRef =  nMessages.create(msg);
 					vm.openMessages.push(msgRef);

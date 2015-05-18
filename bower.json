@@ -1,26 +1,29 @@
 {
-  "name": "nMessages",
-  "version": "1.0.0",
-  "description": "Angular Module for toasts and flash messages",
-  "homepage": "",
-  "author": "Dennis Haulund Nielsen",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/nodes-galactic/nMessages"
-  },
-  "main": [
-    "dist/nMessages.js"
-  ],
-  "ignore": [
-    "demo"
-  ],
-  "dependencies": {
-    "angular": "latest"
-  },
-  "devDependencies": {
-		"angular-sanitize": "latest",
-		"angular-animate": "latest",
-    "angular-mocks": "latest",
-    "angular-scenario": "latest"
-  }
+	"name": "nMessages",
+	"version": "1.0.0",
+	"description": "Angular Module for toasts and flash messages",
+	"homepage": "",
+	"author": "Dennis Haulund Nielsen",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/nodes-galactic/nMessages"
+	},
+	"main": [
+		"dist/nMessages.js",
+		"dist/nMessages.css",
+		"dist/nMessages.scss"
+	],
+	"ignore": [
+		"demo"
+	],
+	"dependencies": {
+		"angular": "*"
+	},
+	"devDependencies": {
+		"angular-mocks": "*",
+		"angular-scenario": "*",
+		"angular-animate": "*",
+		"angular-sanitize": "*",
+		"foundation": "*"
+	}
 }

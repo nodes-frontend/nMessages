@@ -62,8 +62,8 @@ module.exports = function (grunt) {
 				tasks: ['bs-reload']
 			},
 			sass: {
-				files: ['<%= yeoman.src %>/**/*.{scss,sass}'],
-				tasks: ['sass:server', 'autoprefixer', 'bs-injectScss']
+				files: ['<%= yeoman.src %>/**/*.{scss,sass}', 'test.scss'],
+				tasks: ['copy:dist', 'sass:server', 'autoprefixer', 'bs-injectScss']
 			},
 			gruntfile: {
 				files: ['Gruntfile.js']
@@ -97,7 +97,9 @@ module.exports = function (grunt) {
 			},
 			server: {
 				files: {
-					'<%= yeoman.dist %>/<%= pkg.name %>.css': '<%= yeoman.src %>/<%= pkg.name %>.scss'
+					'<%= yeoman.dist %>/<%= pkg.name %>.css': '<%= yeoman.src %>/<%= pkg.name %>.scss',
+					'test.css': 'test.scss'
+					//'<%= yeoman.dist %>/<%= pkg.name %>.foundation.css': '<%= yeoman.src %>/<%= pkg.name %>.foundation.scss'
 				}
 			}
 		},
@@ -207,10 +209,11 @@ module.exports = function (grunt) {
 		wiredep: {
 			options: {
 				cwd: '',
-				devDependencies: true
+				devDependencies: true,
+				includeSelf: true
 			},
 			app: {
-				src: ['index.html']
+				src: ['index.html', 'test.scss']
 				//ignorePath: /\.\.\//
 			}
 		},
@@ -297,7 +300,8 @@ module.exports = function (grunt) {
 	});
 
 	grunt.registerTask('bs-injectScss', function () {
-		browserSync.reload([appConfig.moduleName + '.css']);
+		//browserSync.reload([appConfig.moduleName + '.css']);
+		browserSync.reload(['test.css']);
 	});
 
 	grunt.registerTask('bs-reload', function () {
