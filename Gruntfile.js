@@ -207,10 +207,11 @@ module.exports = function (grunt) {
 		wiredep: {
 			options: {
 				cwd: '',
-				devDependencies: true
+				devDependencies: true,
+				includeSelf: true
 			},
 			app: {
-				src: ['index.html']
+				src: ['index.html', 'test.scss']
 				//ignorePath: /\.\.\//
 			}
 		},
