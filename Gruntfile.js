@@ -97,7 +97,8 @@ module.exports = function (grunt) {
 			},
 			server: {
 				files: {
-					'<%= yeoman.dist %>/<%= pkg.name %>.css': '<%= yeoman.src %>/<%= pkg.name %>.scss'
+					'<%= yeoman.dist %>/<%= pkg.name %>.css': '<%= yeoman.src %>/<%= pkg.name %>.scss',
+					'<%= yeoman.dist %>/<%= pkg.name %>.foundation.css': '<%= yeoman.src %>/<%= pkg.name %>.foundation.scss'
 				}
 			}
 		},

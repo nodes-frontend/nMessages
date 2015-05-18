@@ -1,0 +1,10 @@
+{
+	"version": 3,
+	"file": "nMessages.foundation.css",
+	"sources": [
+		"../nMessages.foundation.scss"
+	],
+	"sourcesContent": [],
+	"mappings": "",
+	"names": []
+}

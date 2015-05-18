@@ -17,12 +17,13 @@
 		"demo"
 	],
 	"dependencies": {
-		"angular": "latest"
+		"angular": "*"
 	},
 	"devDependencies": {
-		"angular-sanitize": "latest",
-		"angular-animate": "latest",
-		"angular-mocks": "latest",
-		"angular-scenario": "latest"
+		"angular-mocks": "*",
+		"angular-scenario": "*",
+		"angular-animate": "*",
+		"angular-sanitize": "*",
+		"foundation": "*"
 	}
 }
