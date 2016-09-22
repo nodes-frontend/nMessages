@@ -8,16 +8,16 @@ $primary-color: darken(magenta, 25%);
 /*
 	Import Foundation scss, as this is what we do in development
 */
-@import "bower_components/foundation/scss/foundation";
+@import "node_modules/foundation-sites/scss/foundation";
 
 /*
 	Test bower.json + wiredep (remove this line, run grunt wiredep, look here)
 */
 // bower:scss
-@import "dist/nMessages.scss";
+@import "src/nMessages.scss";
 // endbower
 
 /*
 	Test Foundation skinning component (@mixins)
 */
-@import "src/nMessages.foundation";
+//@import "src/nMessages.foundation";

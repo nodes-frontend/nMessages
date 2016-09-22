@@ -1,0 +1,32 @@
+.callout {
+	margin: 0 0 1rem 0;
+	padding: 1rem;
+	border: 1px solid rgba(10, 10, 10, 0.25);
+	border-radius: 3px;
+	position: relative;
+	color: #0a0a0a;
+	background-color: white; }
+.callout > :first-child {
+	margin-top: 0; }
+.callout > :last-child {
+	margin-bottom: 0; }
+.callout.primary {
+	background-color: #def2f8; }
+.callout.secondary {
+	background-color: #fcfcfc; }
+.callout.alert {
+	background-color: #fcd6d6; }
+.callout.success {
+	background-color: #e6f7d9; }
+.callout.warning {
+	background-color: #fff3d9; }
+.callout.body-font {
+	background-color: #dedede; }
+.callout.header {
+	background-color: #dedede; }
+.callout.small {
+	padding: 0.5rem;
+}
+.callout.large {
+	padding: 3rem;
+}
