@@ -107,8 +107,8 @@ namespace component {
 
         create(msg: any) {
             if(this.defaults.maxNumber > 0 &&
-               this.messageStack.length >= this.defaults.maxNumber) {
-               this.dismiss(this.messageStack[0]);
+                this.messageStack.length >= this.defaults.maxNumber) {
+                this.dismiss(this.messageStack[0]);
             }
 
             msg = (typeof msg === 'string') ? {content: msg} : msg;
