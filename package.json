@@ -1,6 +1,5 @@
 {
   "name": "nMessages",
-  "version": "0.0.0-semantically-released",
   "description": "Angular 1.x component for toast-like notifications.",
   "main": "index.js",
   "scripts": {
