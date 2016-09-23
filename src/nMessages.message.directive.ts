@@ -27,7 +27,7 @@ namespace component {
 
             if (ctrl.message.dismissOnTimeout) {
                 ctrl.$timeout(function () {
-                    // ctrl.dismiss(ctrl.message.id);
+                    ctrl.dismiss(ctrl.message.id);
                 }, ctrl.message.timeout);
             }
             if (ctrl.message.dismissOnClick) {
@@ -55,6 +55,6 @@ namespace component {
     }
 
     angular
-        .module('component')
+        .module('nMessages')
         .directive('nMessagesMessage', NMessagesMessageDirective.instance);
 }

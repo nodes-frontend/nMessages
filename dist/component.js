@@ -10,7 +10,7 @@ $__System.register("2", [], function (exports_1, context_1) {
         setters: [],
         execute: function () {
             exports_1("default", angular.module("templates", []).run(["$templateCache", function ($templateCache) {
-                $templateCache.put('src/nMessages.message.template.html', '<div class="nodes-messages__message {{ctrl.message.type}}">\n    \n    <a class="nodes-messages__close-button"\n       data-close\n       ng-if="ctrl.message.dismissButton"\n       ng-bind-html="ctrl.message.dismissButtonHtml"\n       ng-click="!ctrl.message.dismissOnClick && dismiss(ctrl.message.id)" ></a>\n    \n    <span class="nodes-messages__content">{{ctrl.message.content}}</span>\n</div>');
+                $templateCache.put('src/nMessages.message.template.html', '<div class="nodes-messages__message {{ctrl.message.type}}">\n    \n    <a class="nodes-messages__close-button close-button"\n       data-close\n       ng-if="ctrl.message.dismissButton"\n       ng-bind-html="ctrl.message.dismissButtonHtml"\n       ng-click="!ctrl.message.dismissOnClick && dismiss(ctrl.message.id)"></a>\n    \n    <span class="nodes-messages__content">{{ctrl.message.content}}</span>\n</div>');
                 $templateCache.put('src/nMessages.wrapper.template.html', '<div class="nodes-messages nodes-messages--{{hPos}}-{{vPos}}">\n    <ul class="nodes-messages__list">\n        <li ng-repeat="message in messages track by $index" n-messages-message="message">\n        </li>\n    </ul>\n</div>\n');
             }]));
         }
@@ -29,7 +29,7 @@ $__System.register('3', [], function (exports_1, context_1) {
                 'use strict';
 
                 var dependencies = ['templates', 'ngSanitize', 'ngAnimate'];
-                angular.module('component', dependencies);
+                angular.module('nMessages', dependencies);
             })(component || (component = {}));
         }
     };
@@ -116,14 +116,13 @@ $__System.register('4', [], function (exports_1, context_1) {
                             this.messages.push(newMsg);
                         }
                         this.messageStack.push(newMsg.id);
-                        console.log(this.messages);
                         return newMsg.id;
                     };
                     NMessagesService.$inject = [];
                     return NMessagesService;
                 }();
                 component.NMessagesService = NMessagesService;
-                angular.module('component').service('nMessages', NMessagesService);
+                angular.module('nMessages').service('nMessages', NMessagesService);
             })(component || (component = {}));
         }
     };
@@ -163,7 +162,7 @@ $__System.register('5', [], function (exports_1, context_1) {
                     }
                     return Message;
                 }();
-                angular.module('component').factory('Message', Message);
+                angular.module('nMessages').factory('Message', Message);
             })(component || (component = {}));
         }
     };
@@ -198,7 +197,7 @@ $__System.register('6', [], function (exports_1, context_1) {
                     NMessagesMessageDirective.prototype.linkFn = function (scope, element, attrs, ctrl) {
                         if (ctrl.message.dismissOnTimeout) {
                             ctrl.$timeout(function () {
-                                // ctrl.dismiss(ctrl.message.id);
+                                ctrl.dismiss(ctrl.message.id);
                             }, ctrl.message.timeout);
                         }
                         if (ctrl.message.dismissOnClick) {
@@ -223,7 +222,7 @@ $__System.register('6', [], function (exports_1, context_1) {
                     NMessagesMessageDirectiveController.$inject = ['$timeout', 'nMessages'];
                     return NMessagesMessageDirectiveController;
                 }();
-                angular.module('component').directive('nMessagesMessage', NMessagesMessageDirective.instance);
+                angular.module('nMessages').directive('nMessagesMessage', NMessagesMessageDirective.instance);
             })(component || (component = {}));
         }
     };
@@ -272,7 +271,7 @@ $__System.register('7', [], function (exports_1, context_1) {
                     NMessagesWrapperController.$inject = ['nMessages'];
                     return NMessagesWrapperController;
                 }();
-                angular.module('component').directive('nMessagesWrapper', NMessagesWrapperDirective.instance);
+                angular.module('nMessages').directive('nMessagesWrapper', NMessagesWrapperDirective.instance);
             })(component || (component = {}));
         }
     };

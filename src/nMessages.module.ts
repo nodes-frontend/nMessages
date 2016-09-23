@@ -7,5 +7,5 @@ namespace component {
 		'ngAnimate'
 	];
 
-	angular.module('component', dependencies);
+	angular.module('nMessages', dependencies);
 }

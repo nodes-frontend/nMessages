@@ -11,7 +11,20 @@
 		list-style: none;
 	}
 	&__message {
+		@include callout-base;
 
+		&.success {
+			@include callout-style($success-color);
+		}
+		&.warning {
+			@include callout-style($warning-color);
+		}
+		&.alert {
+			@include callout-style($alert-color);
+		}
+		&.info {
+			@include callout-style($info-color);
+		}
 	}
 	&__content {
 		cursor: default;

@@ -53,6 +53,6 @@ namespace component {
     }
 
     angular
-        .module('component')
+        .module('nMessages')
         .factory('Message', Message);
 }

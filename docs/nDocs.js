@@ -17,12 +17,12 @@
 			CLIENT_ID: '2304011fdc02ec86a757',
 			CLIENT_SECRET: '8027a247cca6901e6c3d9b68b99af73fabbfad3e',
 			NAME: 'nodes-frontend',
-			REPOSITORY: 'nodes-component-starter'
+			REPOSITORY: 'nMessages'
 		});
 	angular.module('nDocs')
 		.constant('NPM', {
 			URL: 'https://www.npmjs.com/package',
-			NAME: 'nodes-component-starter'
+			NAME: 'nMessages'
 		});
 	angular.module('nDocs')
 		.constant('COMPONENT', {

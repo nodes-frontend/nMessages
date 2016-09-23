@@ -40,6 +40,6 @@ namespace component {
     }
 
     angular
-        .module('component')
+        .module('nMessages')
         .directive('nMessagesWrapper', NMessagesWrapperDirective.instance);
 }

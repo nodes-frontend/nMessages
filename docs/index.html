@@ -77,25 +77,28 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="small-12 columns medium-6">
+                            <p>To get started, inject the <strong>nMessages</strong> provider into your controller,
+                                and call the <span class="js__function">create</span> method.</p>
+                        </div>
                         <div class="small-12 medium-6 columns">
-                            <h3>Basic example:</h3>
-                            <button class="button" ng-click="demo.createBasicMessage()">Show me</button>
+                            <button class="button expanded" ng-click="demo.createBasicMessage()">Basic example</button>
                         </div>
                     </div>
-                    <!--<div class="row">
-                        <div class="small-12 medium-6 columns">
-                            {{demo.testValue | componentFilter}}
+                    <div class="row">
+                        <div class="small-12 columns medium-6">
+                            <p>You can also configure the indicidual messages when calling the <span class="js__function">create</span> method.</p>
                         </div>
-                        <div class="small-12 medium-6 columns">
-                            <component-directive on-event="demo.controllerMethod(message)" data="demo.testValue"></component-directive>
+                        <div class="small-12 medium-6">
+                            <button class="button expanded" ng-click="demo.createAdvancedMessage()">Advanced example</button>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
                 
-                <div class="row" id="availableUI" title="UI Components" data-scrollspy-broadcast>
+                <div class="row" id="installation" title="Installation" data-scrollspy-broadcast>
                     <div class="small-12 columns">
                         <h2>
-                            UI Components
+                            Installation
                         </h2>
                     </div>
                     <div class="small-12 columns">
@@ -155,7 +158,7 @@
                         <n-docs-nodes-engeering-blog-link></n-docs-nodes-engeering-blog-link>
                     </div>
                     <div class="small-12 columns">
-                        <p class="lead">nDocs Table</p>
+                        <p class="lead">Configuration:</p>
                         <table class="n-docs-table">
                             <thead>
                                 <tr>
@@ -163,23 +166,66 @@
                                         Option
                                     </td>
                                     <td>
-                                        Default
+                                        Type
                                     </td>
                                     <td>
-                                        Description
+                                        Details
                                     </td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>
-                                        <code>foo</code>
+                                        <code>type</code>
                                     </td>
                                     <td>
-                                        <code>'bar'</code>
+                                        <span class="js-type js-type__string">string</span>
                                     </td>
                                     <td>
-                                        Toggles using foo
+                                        Use this to add a contextual class to your message
+                                        (ie. <span>'success'</span>, <span>'warning'</span>, <span>'alert'</span>, <span>'info'</span>)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>content</code></td>
+                                    <td><span class="js-type js-type__string">string</span> or <span class="js-type js-type__markup">html</span></td>
+                                    <td>
+                                        You can pass both a string or html, giving you the freedom to customize the messages as you please
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>dismissButton</code></td>
+                                    <td><span class="js-type js-type__boolean">boolean</span></td>
+                                    <td>
+                                        Shows or hides the dismiss button
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>dismissButtomHtml</code></td>
+                                    <td><span class="js-type js-type__string">string</span> or <span class="js-type js-type__markup">html</span></td>
+                                    <td>
+                                        You can pass both a string or html, giving you the freedom to customize the close button (ie. use an icon font)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>dissmissOnClick</code></td>
+                                    <td><span class="js-type js-type__boolean">boolean</span></td>
+                                    <td>
+                                        If <span class="js__boolean">boolean</span> is true, the message can be closed by pressing anywhere on the message - not just the close button
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>dismissOnTimeout</code></td>
+                                    <td><span class="js-type js-type__boolean">boolean</span></td>
+                                    <td>
+                                        Should the message auto-close?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>timeout</code></td>
+                                    <td><span class="js-type js-type__number">int <small>(ms)</small></span></td>
+                                    <td>
+                                        If <span class="js__boolean">boolean</span> is true, the message will be auto-closed after this duration
                                     </td>
                                 </tr>
                             </tbody>
@@ -187,10 +233,10 @@
                     </div>
                 </div>
                 
-                <div class="row" id="syntaxHighlighting" title="Syntax Highlighting" data-scrollspy-broadcast>
+                <div class="row" id="usage" title="Usage" data-scrollspy-broadcast>
                     <div class="small-12 columns">
                         <h2>
-                            Syntax Highlighting
+                            Usage
                         </h2>
                     </div>
                     <div class="small-12 columns">
@@ -243,118 +289,36 @@
         <!-- endbuild -->
         
         <script id="markupExample" type="text/ng-template">
-            <!-- setup selection display/input input:text -->
-            <p class="lead">
-                selection: <input type="text" ng-model="selection">
-            </p>
-            
-            <!-- bind scope.selection to ngSelect model -->
-            <div class="row example" ng-select="selection" super-directive>
-                <div class="col-xs-12">
-                    
-                    <!-- five images with number as option value -->
-                    <!-- add "selected" class on option selected -->
-                    <img class="img-polaroid img-circle"
-                         ng-repeat="num in [1, 2, 3, 4, 5] track by $id($index)"
-                         ng-src="http://lorempixel.com/100/100/sports/{{ num }}"
-                         ng-select-option="{{ num }}"
-                         select-class="{'selected': $optSelected}">
-                </div>
+            <!-- Place the wrapper in the template where you would like your nMessages to appear -->
+            <div class="n-messages-wrapper-container">
+                <n-messages-wrapper></n-messages-wrapper>
             </div>
         </script>
         
         <script id="javaScriptExample" type="text/ng-template">
-            angular.module('nDocs')
-            .service('nDocsGithubService', function($q, $http, $window, GITHUB) {
-            return {
-            getStatistics: getStatistics
-            };
+            /* Inject nMessages into your controller */
+            angular.module('application')
+                .controller('appCtrl', function(nMessages) {
+                    
+                    /* Configure the service */
+                    nMessages.configure({
+                        verticalPosition: 'top',
+                        horizontalPosition: 'right'
+                    });
             
-            function getStatistics() {
+                    /* Basic message */
+                    nMessages.create('A very basic message');
             
-            var deferred = $q.defer();
-            
-            var repoUrl = [
-            GITHUB.URL,
-            GITHUB.NAME,
-            GITHUB.REPOSITORY
-            ].join('/');
-            
-            var repoRequest = {
-            method: 'GET',
-            url: repoUrl,
-            cache: true,
-            params: {
-            client_id: GITHUB.CLIENT_ID,
-            client_secret: GITHUB.CLIENT_SECRET
-            }
-            };
-            
-            var releasesUrl = [
-            GITHUB.URL,
-            GITHUB.NAME,
-            GITHUB.REPOSITORY,
-            'releases',
-            'latest'
-            ].join('/');
-            
-            var releasesRequest = {
-            method: 'GET',
-            url: releasesUrl,
-            cache: true,
-            params: {
-            client_id: GITHUB.CLIENT_ID,
-            client_secret: GITHUB.CLIENT_SECRET
-            }
-            };
-            
-            if(!$window.localStorage.getItem(GITHUB.NAME + '-' + GITHUB.REPOSITORY)) {
-            _getFromGithub().then(function(data) {
-            deferred.resolve(data);
-            });
-            } else {
-            var localStorageData = JSON.parse($window.localStorage.getItem(GITHUB.NAME + '-' + GITHUB.REPOSITORY));
-            var lastTime = localStorageData.timeStamp;
-            
-            // Cache response for 10sec to avoid hitting the quota limits
-            if(new Date().valueOf() - lastTime < 10000) {
-            deferred.resolve(localStorageData);
-            } else {
-            _getFromGithub().then(function(data) {
-            deferred.resolve(data);
-            });
-            }
-                
-            }
-            
-            return deferred.promise;
-            
-            function _getFromGithub() {
-            return $q.all([$http(repoRequest), $http(releasesRequest)])
-            .then(function(responses) {
-            var repo = responses[0].data;
-            var releases = responses[1].data;
-            
-            var toStorage = {
-            timeStamp: new Date().valueOf(),
-            repoStars: repo.stargazers_count,
-            repoName: repo.name,
-            repoUrl: repo.html_url,
-            releaseName: releases.name,
-            releaseUrl: releases.html_url
-            };
-            
-            $window.localStorage.setItem(GITHUB.NAME + '-' + GITHUB.REPOSITORY, JSON.stringify(toStorage));
-            
-            return toStorage;
-            
-            })
-            .catch(function(response) {
-            deferred.reject(response);
-            });
-            }
-                
-            }
+                    /* You can also configure your message */
+                    nMessages.create({
+                        type: 'success',
+                        content: 'An advanced message',
+                        dismissButton: true,
+                        dismissButtonHtml: '&times',
+                        dismissOnClick: true,
+                        dismissOnTimeout: true,
+                        timout: 4000
+                    });
             });
         </script>
     
