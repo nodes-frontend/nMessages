@@ -123,6 +123,8 @@ namespace component {
 
             this.messageStack.push(newMsg.id);
 
+            console.log(this.messages);
+
             return newMsg.id;
         }
     }

@@ -27,7 +27,7 @@ namespace component {
 
             if (ctrl.message.dismissOnTimeout) {
                 ctrl.$timeout(function () {
-                    ctrl.dismiss(ctrl.message.id);
+                    // ctrl.dismiss(ctrl.message.id);
                 }, ctrl.message.timeout);
             }
             if (ctrl.message.dismissOnClick) {

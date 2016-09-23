@@ -5,28 +5,39 @@
 	border-radius: 3px;
 	position: relative;
 	color: #0a0a0a;
-	background-color: white; }
-.callout > :first-child {
-	margin-top: 0; }
-.callout > :last-child {
-	margin-bottom: 0; }
-.callout.primary {
-	background-color: #def2f8; }
-.callout.secondary {
-	background-color: #fcfcfc; }
-.callout.alert {
-	background-color: #fcd6d6; }
-.callout.success {
-	background-color: #e6f7d9; }
-.callout.warning {
-	background-color: #fff3d9; }
-.callout.body-font {
-	background-color: #dedede; }
-.callout.header {
-	background-color: #dedede; }
-.callout.small {
-	padding: 0.5rem;
+	background-color: white;
+
+	&.primary {
+		background-color: #def2f8;
+	}
+	&.secondary {
+		background-color: #fcfcfc;
+	}
+	&.alert {
+		background-color: #fcd6d6;
+	}
+	&.success {
+		background-color: #e6f7d9;
+	}
+	&.warning {
+		background-color: #fff3d9;
+	}
+	&.body-font {
+		background-color: #dedede;
+	}
+	&.header {
+		background-color: #dedede;
+	}
+	&.small {
+		padding: 0.5rem;
+	}
+	&.large {
+		padding: 3rem;
+	}
 }
-.callout.large {
-	padding: 3rem;
+.callout > :first-child {
+	margin-top: 0;
+}
+.callout > :last-child {
+	margin-bottom: 0;
 }

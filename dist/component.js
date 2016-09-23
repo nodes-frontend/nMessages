@@ -116,6 +116,7 @@ $__System.register('4', [], function (exports_1, context_1) {
                             this.messages.push(newMsg);
                         }
                         this.messageStack.push(newMsg.id);
+                        console.log(this.messages);
                         return newMsg.id;
                     };
                     NMessagesService.$inject = [];
@@ -128,6 +129,46 @@ $__System.register('4', [], function (exports_1, context_1) {
     };
 });
 $__System.register('5', [], function (exports_1, context_1) {
+    "use strict";
+
+    var __moduleName = context_1 && context_1.id;
+    var component;
+    return {
+        setters: [],
+        execute: function () {
+            var component;
+            (function (component) {
+                'use strict';
+
+                var Message = function () {
+                    function Message(msg, config, messagesStack) {
+                        this.msg = msg;
+                        this.config = config;
+                        this.messagesStack = messagesStack;
+                        var id = Math.floor(Math.random() * 1000);
+                        while (messagesStack.indexOf(id) > -1) {
+                            id = Math.floor(Math.random() * 1000);
+                        }
+                        var message = {
+                            id: id,
+                            type: config.type,
+                            dismissOnTimeout: config.dismissOnTimeout,
+                            timeout: config.timeout,
+                            dismissButton: config.dismissButton,
+                            dismissButtonHtml: config.dismissButtonHtml,
+                            dismissOnClick: config.dismissOnClick
+                        };
+                        angular.extend(message, msg);
+                        return message;
+                    }
+                    return Message;
+                }();
+                angular.module('component').factory('Message', Message);
+            })(component || (component = {}));
+        }
+    };
+});
+$__System.register('6', [], function (exports_1, context_1) {
     "use strict";
 
     var __moduleName = context_1 && context_1.id;
@@ -157,7 +198,7 @@ $__System.register('5', [], function (exports_1, context_1) {
                     NMessagesMessageDirective.prototype.linkFn = function (scope, element, attrs, ctrl) {
                         if (ctrl.message.dismissOnTimeout) {
                             ctrl.$timeout(function () {
-                                ctrl.dismiss(ctrl.message.id);
+                                // ctrl.dismiss(ctrl.message.id);
                             }, ctrl.message.timeout);
                         }
                         if (ctrl.message.dismissOnClick) {
@@ -187,7 +228,7 @@ $__System.register('5', [], function (exports_1, context_1) {
         }
     };
 });
-$__System.register('6', [], function (exports_1, context_1) {
+$__System.register('7', [], function (exports_1, context_1) {
     "use strict";
 
     var __moduleName = context_1 && context_1.id;
@@ -212,9 +253,9 @@ $__System.register('6', [], function (exports_1, context_1) {
                         return new NMessagesWrapperDirective();
                     };
                     NMessagesWrapperDirective.prototype.linkFn = function (scope, element, attrs, ctrl) {
-                        scope.hPos = ctrl.getSettings().horizontalPosition;
-                        scope.vPos = ctrl.getSettings().verticalPosition;
-                        scope.messages = ctrl.getMessages();
+                        scope.hPos = ctrl.nMessages.settings.horizontalPosition;
+                        scope.vPos = ctrl.nMessages.settings.verticalPosition;
+                        scope.messages = ctrl.nMessages.messages; //.getMessages();
                     };
                     return NMessagesWrapperDirective;
                 }();
@@ -236,12 +277,12 @@ $__System.register('6', [], function (exports_1, context_1) {
         }
     };
 });
-$__System.register('1', ['2', '3', '4', '5', '6'], function (exports_1, context_1) {
+$__System.register('1', ['2', '3', '4', '5', '6', '7'], function (exports_1, context_1) {
     "use strict";
 
     var __moduleName = context_1 && context_1.id;
     return {
-        setters: [function (_1) {}, function (_2) {}, function (_3) {}, function (_4) {}, function (_5) {}],
+        setters: [function (_1) {}, function (_2) {}, function (_3) {}, function (_4) {}, function (_5) {}, function (_6) {}],
         execute: function () {}
     };
 });

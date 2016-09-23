@@ -18,16 +18,16 @@ namespace component {
 
         private linkFn(scope: any, element: any, attrs: any, ctrl: NMessagesWrapperController) {
 
-            scope.hPos = ctrl.getSettings().horizontalPosition;
-            scope.vPos = ctrl.getSettings().verticalPosition;
-            scope.messages = ctrl.getMessages();
+            scope.hPos = ctrl.nMessages.settings.horizontalPosition;
+            scope.vPos = ctrl.nMessages.settings.verticalPosition;
+            scope.messages = ctrl.nMessages.messages;//.getMessages();
         }
     }
 
     class NMessagesWrapperController {
         static $inject: Array<string> = ['nMessages'];
 
-        constructor(private nMessages: any) {
+        constructor(public nMessages: any) {
         }
 
         getSettings() {
