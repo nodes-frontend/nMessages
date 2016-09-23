@@ -1,7 +1,12 @@
+*~
+.DS_Store
+.coveralls.yml
 node_modules
-.tmp
-.sass-cache
-bower_components
-_local.config.js
+jspm_packages
 .idea
+coverage
 npm-debug.log
+tmp
+typings
+.publish
+release

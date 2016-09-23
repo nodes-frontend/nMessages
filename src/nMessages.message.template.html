@@ -1,9 +1,10 @@
-<div class="nodes-messages__message {{message.type}}">
-
-	<a class="nodes-messages__close-button"
-	   ng-if="message.dismissButton"
-	   ng-bind-html="message.dismissButtonHtml"
-	   ng-click="!message.dismissOnClick && dismis()" ></a>
-
-	<span class="nodes-messages__content" ng-transclude=""></span>
+<div class="nodes-messages__message {{ctrl.message.type}}">
+    
+    <a class="nodes-messages__close-button close-button"
+       data-close
+       ng-if="ctrl.message.dismissButton"
+       ng-bind-html="ctrl.message.dismissButtonHtml"
+       ng-click="!ctrl.message.dismissOnClick && dismiss(ctrl.message.id)"></a>
+    
+    <span class="nodes-messages__content">{{ctrl.message.content}}</span>
 </div>

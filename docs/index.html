@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>nMessages</title>
+        
+        <!-- build:css(./docs) docs.css -->
+        <link rel="stylesheet" href="docs.css">
+        <!-- endbuild -->
+        
+        <!-- build:css component.css -->
+        <link rel="stylesheet" href="dist/component.css">
+        <!-- endbuild -->
+        
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/tomorrow.min.css">
+        
+        <style>
+            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+                display: none !important;
+            }
+        </style>
+        
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,700" rel="stylesheet">
+    </head>
+    <body ng-app="demoApp" ng-cloak>
+        
+        
+        <div class="n-docs-header">
+            
+            <div headroom offset="330" classes="{pinned: 'n-docs-navbar--pinned', unpinned: 'n-docs-navbar--unpinned', top: 'n-docs-navbar--top'}" class="n-docs-navbar">
+                <canvas n-docs-granim colors="[['#2199e8', '#6433e8'],['#936cfb', '#5abbfc']]" class="n-docs-navbar__gradient"></canvas>
+                
+                <div class="n-docs-navbar__content">
+                    <div class="small-6 columns">
+                        <h1 class="n-docs-navbar__title">
+                            nMessages
+                        </h1>
+                    </div>
+                    <div class="small-6 columns">
+                        <n-docs-github-link></n-docs-github-link>
+                    </div>
+                </div>
+            
+            </div>
+            
+            <div class="n-docs-hero">
+                <canvas n-docs-granim colors="[['#2199e8', '#6433e8'],['#936cfb', '#5abbfc']]" class="n-docs-hero__gradient"></canvas>
+                
+                <div class="n-docs-hero__content row">
+                    <div class="small-12 columns">
+                        <h1 class="n-docs-hero__title">
+                            nMessages
+                        </h1>
+                    </div>
+                    <div class="small-12 columns">
+                        <h2 class="n-docs-hero__subtitle">
+                            An effective Angular 1.x component for displaying toast-like notifications. Highly customizable and easy to implement.
+                        </h2>
+                    </div>
+                    <div class="small-12 columns text-center n-docs-hero__github">
+                        <n-docs-github-latest-release></n-docs-github-latest-release>
+                        <n-docs-github-link></n-docs-github-link>
+                    </div>
+                    <div class="small-12 columns text-center">
+                        <a href="#getStarted" class="n-docs-hero__scroll-anchor">Get started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="n-docs-content">
+            <div class="n-docs-content__primary" id="getStarted">
+                <div ng-controller="demoController as demo">
+                    <div class="row" id="example" title="Example" data-scrollspy-broadcast>
+                        <div class="small-12 columns">
+                            <h2>Example</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-12 columns medium-6">
+                            <p>To get started, inject the <strong>nMessages</strong> provider into your controller,
+                                and call the <span class="js__function">create</span> method.</p>
+                        </div>
+                        <div class="small-12 medium-6 columns">
+                            <button class="button expanded" ng-click="demo.createBasicMessage()">Basic example</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="small-12 columns medium-6">
+                            <p>You can also configure the indicidual messages when calling the <span class="js__function">create</span> method.</p>
+                        </div>
+                        <div class="small-12 medium-6">
+                            <button class="button expanded" ng-click="demo.createAdvancedMessage()">Advanced example</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row" id="installation" title="Installation" data-scrollspy-broadcast>
+                    <div class="small-12 columns">
+                        <h2>
+                            Installation
+                        </h2>
+                    </div>
+                    <div class="small-12 columns">
+                        <p class="lead">nDocs Github Link:</p>
+                        <n-docs-github-link></n-docs-github-link>
+                    </div>
+                    <div class="small-12 columns">
+                        <p class="lead">nDocs Github Stars:</p>
+                        <n-docs-github-stars></n-docs-github-stars>
+                    </div>
+                    <div class="small-12 columns">
+                        <p class="lead">nDocs Github Latest Release:</p>
+                        <n-docs-github-latest-release></n-docs-github-latest-release>
+                    </div>
+                    <div class="small-12 columns">
+                        <p class="lead">nDocs Npm Install Guide:</p>
+                        <n-docs-npm-install-guide></n-docs-npm-install-guide>
+                    </div>
+                    <div class="small-12 columns">
+                        <p class="lead">nDocs Angular Install Guide:</p>
+                        <n-docs-angular-install-guide></n-docs-angular-install-guide>
+                    </div>
+                    <div class="small-12 columns">
+                        <p class="lead">nDocs Callouts:</p>
+                        <p>Severity 0</p>
+                        <n-docs-callout severity="0">
+                            <p class="n-docs-callout__title">Just something nice</p>
+                            <div class="n-docs-callout__content">
+                                <p>Could be a nice trick to take full advantage of XY</p>
+                            </div>
+                        </n-docs-callout>
+                        <p>Severity 1</p>
+                        <n-docs-callout severity="1">
+                            <p class="n-docs-callout__title">Oh this is probably worth reading</p>
+                            <div class="n-docs-callout__content">
+                                <p>Maybe a browser inconsistency bug?</p>
+                            </div>
+                        </n-docs-callout>
+                        <p>Severity 2</p>
+                        <n-docs-callout severity="2">
+                            <p class="n-docs-callout__title">EVERYTHING IS ON FIRE!</p>
+                            <div class="n-docs-callout__content">
+                                <p>Breaking changes! Deprecations! OH MY!</p>
+                            </div>
+                        </n-docs-callout>
+                        <p>No Severity</p>
+                        <n-docs-callout>
+                            <p class="n-docs-callout__title">Same as using severity 0</p>
+                        </n-docs-callout>
+                    </div>
+                    <div class="small-12 columns">
+                        <p class="lead">nDocs Nodes Website Link</p>
+                        <n-docs-nodes-website-link></n-docs-nodes-website-link>
+                    </div>
+                    <div class="small-12 columns">
+                        <p class="lead">nDocs Nodes Engineering Blog Link</p>
+                        <n-docs-nodes-engeering-blog-link></n-docs-nodes-engeering-blog-link>
+                    </div>
+                    <div class="small-12 columns">
+                        <p class="lead">Configuration:</p>
+                        <table class="n-docs-table">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        Option
+                                    </td>
+                                    <td>
+                                        Type
+                                    </td>
+                                    <td>
+                                        Details
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code>type</code>
+                                    </td>
+                                    <td>
+                                        <span class="js-type js-type__string">string</span>
+                                    </td>
+                                    <td>
+                                        Use this to add a contextual class to your message
+                                        (ie. <span>'success'</span>, <span>'warning'</span>, <span>'alert'</span>, <span>'info'</span>)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>content</code></td>
+                                    <td><span class="js-type js-type__string">string</span> or <span class="js-type js-type__markup">html</span></td>
+                                    <td>
+                                        You can pass both a string or html, giving you the freedom to customize the messages as you please
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>dismissButton</code></td>
+                                    <td><span class="js-type js-type__boolean">boolean</span></td>
+                                    <td>
+                                        Shows or hides the dismiss button
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>dismissButtomHtml</code></td>
+                                    <td><span class="js-type js-type__string">string</span> or <span class="js-type js-type__markup">html</span></td>
+                                    <td>
+                                        You can pass both a string or html, giving you the freedom to customize the close button (ie. use an icon font)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>dissmissOnClick</code></td>
+                                    <td><span class="js-type js-type__boolean">boolean</span></td>
+                                    <td>
+                                        If <span class="js__boolean">boolean</span> is true, the message can be closed by pressing anywhere on the message - not just the close button
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>dismissOnTimeout</code></td>
+                                    <td><span class="js-type js-type__boolean">boolean</span></td>
+                                    <td>
+                                        Should the message auto-close?
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>timeout</code></td>
+                                    <td><span class="js-type js-type__number">int <small>(ms)</small></span></td>
+                                    <td>
+                                        If <span class="js__boolean">boolean</span> is true, the message will be auto-closed after this duration
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="row" id="usage" title="Usage" data-scrollspy-broadcast>
+                    <div class="small-12 columns">
+                        <h2>
+                            Usage
+                        </h2>
+                    </div>
+                    <div class="small-12 columns">
+                        <n-docs-code-example>
+                            <hljs hljs-include="'markupExample'"></hljs>
+                        </n-docs-code-example>
+                        
+                        <n-docs-code-example>
+                            <hljs hljs-include="'javaScriptExample'"></hljs>
+                        </n-docs-code-example>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="n-docs-content__secondary hide-for-small-only">
+                <div class="row">
+                    <div class="small-12 columns">
+                        <n-docs-toc scan="#getStarted"></n-docs-toc>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="n-messages-demo">
+            <n-messages-wrapper></n-messages-wrapper>
+        </div>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+        <!-- build:js vendor.js -->
+        <script src="node_modules/angular/angular.js"></script>
+        <script src="node_modules/angular-animate/angular-animate.js"></script>
+        <script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
+        <script src="node_modules/granim/dist/granim.js"></script>
+        <script src="node_modules/headroom.js/dist/headroom.js"></script>
+        <script src="node_modules/headroom.js/dist/angular.headroom.js"></script>
+        <script src="node_modules/highlightjs-line-numbers.js/dist/highlightjs-line-numbers.min.js"></script>
+        <script src="node_modules/angular-highlightjs/build/angular-highlightjs.js"></script>
+        <script src="node_modules/angular-ui-scrollpoint/dist/scrollpoint.js"></script>
+        <!-- endbuild -->
+        
+        <!-- component.js will be used on dev, in production it will be rewrited to minfied version component.min.js -->
+        <!-- build:js component.js -->
+        <script src="dist/component.js"></script>
+        <!-- endbuild -->
+        
+        <!-- build:js(./docs) example.js -->
+        <script src="example.js"></script>
+        <script src="lib/ng-Scrollspy.js"></script>
+        <script src="nDocs.js"></script>
+        <!-- endbuild -->
+        
+        <script id="markupExample" type="text/ng-template">
+            <!-- Place the wrapper in the template where you would like your nMessages to appear -->
+            <div class="n-messages-wrapper-container">
+                <n-messages-wrapper></n-messages-wrapper>
+            </div>
+        </script>
+        
+        <script id="javaScriptExample" type="text/ng-template">
+            /* Inject nMessages into your controller */
+            angular.module('application')
+                .controller('appCtrl', function(nMessages) {
+                    
+                    /* Configure the service */
+                    nMessages.configure({
+                        verticalPosition: 'top',
+                        horizontalPosition: 'right'
+                    });
+            
+                    /* Basic message */
+                    nMessages.create('A very basic message');
+            
+                    /* You can also configure your message */
+                    nMessages.create({
+                        type: 'success',
+                        content: 'An advanced message',
+                        dismissButton: true,
+                        dismissButtonHtml: '&times',
+                        dismissOnClick: true,
+                        dismissOnTimeout: true,
+                        timout: 4000
+                    });
+            });
+        </script>
+    
+    </body>
+</html>
