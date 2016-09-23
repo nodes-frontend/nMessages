@@ -10,7 +10,8 @@ $__System.register("2", [], function (exports_1, context_1) {
         setters: [],
         execute: function () {
             exports_1("default", angular.module("templates", []).run(["$templateCache", function ($templateCache) {
-                $templateCache.put('src/component.html', '<div class="component">\n    <button class="button success" ng-click="ComponentDirective.event({message: \'from directive\'})">Trigger outside method (controller)</button>\n    <p>\n        Data from the outside: {{ComponentDirective.data}}\n    </p>\n    <p>\n        Internal directive data: {{internalValue}}\n        <button class="button" ng-click="internalDirectiveMethod()">Trigger internal method</button>\n    </p>\n</div>');
+                $templateCache.put('src/nMessages.message.template.html', '<div class="nodes-messages__message {{ctrl.message.type}}">\n    \n    <a class="nodes-messages__close-button"\n       data-close\n       ng-if="ctrl.message.dismissButton"\n       ng-bind-html="ctrl.message.dismissButtonHtml"\n       ng-click="!ctrl.message.dismissOnClick && dismiss(ctrl.message.id)" ></a>\n    \n    <span class="nodes-messages__content">{{ctrl.message.content}}</span>\n</div>');
+                $templateCache.put('src/nMessages.wrapper.template.html', '<div class="nodes-messages nodes-messages--{{hPos}}-{{vPos}}">\n    <ul class="nodes-messages__list">\n        <li ng-repeat="message in messages track by $index" n-messages-message="message">\n        </li>\n    </ul>\n</div>\n');
             }]));
         }
     };
@@ -27,7 +28,7 @@ $__System.register('3', [], function (exports_1, context_1) {
             (function (component) {
                 'use strict';
 
-                var dependencies = ['templates'];
+                var dependencies = ['templates', 'ngSanitize', 'ngAnimate'];
                 angular.module('component', dependencies);
             })(component || (component = {}));
         }
@@ -43,11 +44,85 @@ $__System.register('4', [], function (exports_1, context_1) {
         execute: function () {
             var component;
             (function (component) {
-                config.$inject = ['componentProvider'];
-                function config(componentProvider) {
-                    componentProvider.configure({ test: 'Testing Configure Function' });
-                }
-                angular.module('component').config(config);
+                'use strict';
+
+                var Message = function () {
+                    function Message(msg, nMessagesService) {
+                        this.msg = msg;
+                        this.nMessagesService = nMessagesService;
+                        var id = Math.floor(Math.random() * 1000);
+                        while (nMessagesService.messages.indexOf(id) > -1) {
+                            id = Math.floor(Math.random() * 1000);
+                        }
+                        var message = {
+                            id: id,
+                            type: nMessagesService.defaults.type,
+                            dismissOnTimeout: nMessagesService.defaults.dismissOnTimeout,
+                            timeout: nMessagesService.defaults.timeout,
+                            dismissButton: nMessagesService.defaults.dismissButton,
+                            dismissButtonHtml: nMessagesService.defaults.dismissButtonHtml,
+                            dismissOnClick: nMessagesService.defaults.dismissOnClick
+                        };
+                        angular.extend(message, msg);
+                        return message;
+                    }
+                    return Message;
+                }();
+                component.Message = Message;
+                var NMessagesService = function () {
+                    function NMessagesService() {
+                        this.messages = [];
+                        this.messageStack = [];
+                        this.defaults = {
+                            type: 'success',
+                            dismissOnTimeout: true,
+                            timeout: 4000,
+                            dismissButton: false,
+                            dismissButtonHtml: '&times;',
+                            dismissOnClick: true,
+                            horizontalPosition: 'center',
+                            verticalPosition: 'top',
+                            maxNumber: 0
+                        };
+                        this.settings = this.defaults;
+                    }
+                    NMessagesService.prototype.configure = function (config) {
+                        angular.extend(this.defaults, config);
+                    };
+                    NMessagesService.prototype.dismiss = function (id) {
+                        if (id) {
+                            for (var i = this.messages.length - 1; i >= 0; i--) {
+                                if (this.messages[i].id === id) {
+                                    this.messages.splice(i, 1);
+                                    this.messageStack.splice(this.messageStack.indexOf(id), 1);
+                                }
+                            }
+                        } else {
+                            while (this.messages.length > 0) {
+                                this.messages.pop();
+                            }
+                            this.messageStack = [];
+                        }
+                    };
+                    NMessagesService.prototype.create = function (msg) {
+                        if (this.defaults.maxNumber > 0 && this.messageStack.length >= this.defaults.maxNumber) {
+                            this.dismiss(this.messageStack[0]);
+                        }
+                        msg = typeof msg === 'string' ? { content: msg } : msg;
+                        var newMsg = new Message(msg, this);
+                        if (this.defaults.verticalPosition === 'bottom') {
+                            this.messages.unshift(newMsg);
+                        } else {
+                            this.messages.push(newMsg);
+                        }
+                        this.messageStack.push(newMsg.id);
+                        return newMsg.id;
+                    };
+                    NMessagesService.$inject = [];
+                    return NMessagesService;
+                }();
+                component.NMessagesService = NMessagesService;
+                angular.module('component').service('nMessages', NMessagesService);
             })(component || (component = {}));
         }
     };
@@ -62,28 +137,52 @@ $__System.register('5', [], function (exports_1, context_1) {
         execute: function () {
             var component;
             (function (component) {
-                var ComponentProvider = function () {
-                    function ComponentProvider() {
-                        var _this = this;
-                        this.config = {
-                            debug: true
-                        };
-                        this.$get = function () {
-                            return { config: _this.config };
+                'use strict';
+
+                var NMessagesMessageDirective = function () {
+                    function NMessagesMessageDirective() {
+                        this.bindToController = true;
+                        this.link = this.linkFn;
+                        this.controller = NMessagesMessageDirectiveController;
+                        this.restrict = 'EA';
+                        this.templateUrl = 'src/nMessages.message.template.html';
+                        this.controllerAs = 'ctrl';
+                        this.scope = {
+                            message: '=nMessagesMessage'
                         };
                     }
-                    ComponentProvider.prototype.configure = function (config) {
-                        if (!arguments[0]) {
-                            return this.config;
-                        } else {
-                            angular.extend(this.config, config);
+                    NMessagesMessageDirective.instance = function () {
+                        return new NMessagesMessageDirective();
+                    };
+                    NMessagesMessageDirective.prototype.linkFn = function (scope, element, attrs, ctrl) {
+                        if (ctrl.message.dismissOnTimeout) {
+                            ctrl.$timeout(function () {
+                                ctrl.dismiss(ctrl.message.id);
+                            }, ctrl.message.timeout);
+                        }
+                        if (ctrl.message.dismissOnClick) {
+                            element.bind('click', function () {
+                                ctrl.dismiss(ctrl.message.id);
+                                scope.$apply();
+                                scope.$destroy();
+                            });
                         }
                     };
-                    ComponentProvider.$inject = [];
-                    return ComponentProvider;
+                    NMessagesMessageDirective.$inject = [];
+                    return NMessagesMessageDirective;
                 }();
-                component.ComponentProvider = ComponentProvider;
-                angular.module('component').provider('component', ComponentProvider);
+                var NMessagesMessageDirectiveController = function () {
+                    function NMessagesMessageDirectiveController($timeout, nMessages) {
+                        this.$timeout = $timeout;
+                        this.nMessages = nMessages;
+                    }
+                    NMessagesMessageDirectiveController.prototype.dismiss = function (messageId) {
+                        this.nMessages.dismiss(messageId);
+                    };
+                    NMessagesMessageDirectiveController.$inject = ['$timeout', 'nMessages'];
+                    return NMessagesMessageDirectiveController;
+                }();
+                angular.module('component').directive('nMessagesMessage', NMessagesMessageDirective.instance);
             })(component || (component = {}));
         }
     };
@@ -100,120 +199,49 @@ $__System.register('6', [], function (exports_1, context_1) {
             (function (component) {
                 'use strict';
 
-                var ComponentFilter = function () {
-                    function ComponentFilter() {}
-                    ComponentFilter.instance = function () {
-                        return new ComponentFilter().filterFn;
-                    };
-                    ComponentFilter.prototype.filterFn = function (input) {
-                        return input ? input + '\u2713' : '\u2718';
-                    };
-                    ComponentFilter.$inject = [];
-                    return ComponentFilter;
-                }();
-                component.ComponentFilter = ComponentFilter;
-                angular.module('component').filter('componentFilter', ComponentFilter.instance);
-            })(component || (component = {}));
-        }
-    };
-});
-$__System.register('7', [], function (exports_1, context_1) {
-    "use strict";
-
-    var __moduleName = context_1 && context_1.id;
-    var component;
-    return {
-        setters: [],
-        execute: function () {
-            var component;
-            (function (component) {
-                'use strict';
-
-                var ComponentService = function () {
-                    function ComponentService() {
-                        this.data = [{
-                            'ID': 1,
-                            'title': 'dummy 1'
-                        }, {
-                            'ID': 2,
-                            'title': 'dummy 2'
-                        }, {
-                            'ID': 3,
-                            'title': 'dummy 3'
-                        }];
-                    }
-                    ComponentService.prototype.index = function () {
-                        return this.data;
-                    };
-                    ComponentService.prototype.byID = function (ID) {
-                        return this.data.filter(function (item) {
-                            return item.ID === ID;
-                        })[0];
-                    };
-                    ComponentService.$inject = [];
-                    return ComponentService;
-                }();
-                angular.module('component').service('ComponentService', ComponentService);
-            })(component || (component = {}));
-        }
-    };
-});
-$__System.register('8', [], function (exports_1, context_1) {
-    "use strict";
-
-    var __moduleName = context_1 && context_1.id;
-    var component;
-    return {
-        setters: [],
-        execute: function () {
-            var component;
-            (function (component) {
-                'use strict';
-
-                var ComponentDirective = function () {
-                    function ComponentDirective() {
-                        this.bindToController = true;
-                        this.link = this.linkFn;
-                        this.controller = ComponentDirectiveController;
+                var NMessagesWrapperDirective = function () {
+                    function NMessagesWrapperDirective() {
                         this.restrict = 'EA';
-                        this.templateUrl = 'src/component.html';
-                        this.controllerAs = 'ComponentDirective';
-                        this.scope = {
-                            event: '&onEvent',
-                            data: '='
-                        };
+                        this.controller = NMessagesWrapperController;
+                        this.replace = true;
+                        this.templateUrl = 'src/nMessages.wrapper.template.html';
+                        this.controllerAs = 'wrapper';
+                        this.link = this.linkFn;
                     }
-                    ComponentDirective.instance = function () {
-                        return new ComponentDirective();
+                    NMessagesWrapperDirective.instance = function () {
+                        return new NMessagesWrapperDirective();
                     };
-                    ComponentDirective.prototype.linkFn = function (scope, element, attrs) {
-                        scope.internalValue = true;
-                        scope.internalDirectiveMethod = function () {
-                            scope.internalValue = !scope.internalValue;
-                        };
+                    NMessagesWrapperDirective.prototype.linkFn = function (scope, element, attrs, ctrl) {
+                        scope.hPos = ctrl.getSettings().horizontalPosition;
+                        scope.vPos = ctrl.getSettings().verticalPosition;
+                        scope.messages = ctrl.getMessages();
                     };
-                    ComponentDirective.$inject = [];
-                    return ComponentDirective;
+                    return NMessagesWrapperDirective;
                 }();
-                var ComponentDirectiveController = function () {
-                    function ComponentDirectiveController(ComponentService) {
-                        this.ComponentService = ComponentService;
-                        console.log('Injected service:', this.ComponentService.index());
+                var NMessagesWrapperController = function () {
+                    function NMessagesWrapperController(nMessages) {
+                        this.nMessages = nMessages;
                     }
-                    ComponentDirectiveController.$inject = ['ComponentService'];
-                    return ComponentDirectiveController;
+                    NMessagesWrapperController.prototype.getSettings = function () {
+                        return this.nMessages.settings;
+                    };
+                    NMessagesWrapperController.prototype.getMessages = function () {
+                        return this.nMessages.messages;
+                    };
+                    NMessagesWrapperController.$inject = ['nMessages'];
+                    return NMessagesWrapperController;
                 }();
-                angular.module('component').directive('componentDirective', ComponentDirective.instance);
+                angular.module('component').directive('nMessagesWrapper', NMessagesWrapperDirective.instance);
             })(component || (component = {}));
         }
     };
 });
-$__System.register('1', ['2', '3', '4', '5', '6', '7', '8'], function (exports_1, context_1) {
+$__System.register('1', ['2', '3', '4', '5', '6'], function (exports_1, context_1) {
     "use strict";
 
     var __moduleName = context_1 && context_1.id;
     return {
-        setters: [function (_1) {}, function (_2) {}, function (_3) {}, function (_4) {}, function (_5) {}, function (_6) {}, function (_7) {}],
+        setters: [function (_1) {}, function (_2) {}, function (_3) {}, function (_4) {}, function (_5) {}],
         execute: function () {}
     };
 });

@@ -1,7 +1,7 @@
 {
-  "name": "nodes-component-starter",
+  "name": "nMessages",
   "version": "0.0.0-semantically-released",
-  "description": "Boilerplate for Nodes components",
+  "description": "Angular 1.x component for toast-like notifications.",
   "main": "index.js",
   "scripts": {
     "commit": "./node_modules/.bin/git-cz",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nodes-frontend/nodes-component-starter.git"
+    "url": "https://github.com/nodes-frontend/nMessages"
   },
   "keywords": [
     "angular",
@@ -29,9 +29,9 @@
   "author": "Alexander Hafstad <alexander@hafstad.dk> (http://www.nodesagency.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nodes-frontend/nodes-component-starter/issues"
+    "url": "https://github.com/nodes-frontend/nMessages/issues"
   },
-  "homepage": "https://github.com/nodes-frontend/nodes-component-starter#readme",
+  "homepage": "https://github.com/nodes-frontend/nMessages#readme",
   "dependencies": {
     "angular": "1.5.8",
     "angular-animate": "^1.5.8",
